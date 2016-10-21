@@ -31,6 +31,8 @@ class SIPRegisterHandler(socketserver.DatagramRequestHandler):
                                                  time.gmtime(tiempo_expirar))
         print('El cliente nos manda: ',  ' '.join(linea_cliente))
 
+        datos = {}
+        eliminar = []  # metemos los usuarios que borremos
         if metodo == 'REGISTER':
             datos['Direccion'] = IP
             datos['Expiracion'] = tiempo_expiracion_string
@@ -38,7 +40,6 @@ class SIPRegisterHandler(socketserver.DatagramRequestHandler):
             if expires != 0:
                 print('REGISTRAMOS a ' + usuario + ' en la lista de clientes.')
 
-            eliminar = []  # metemos los usuarios que borremos
             for Cliente in lista_clientes:
                 dato = lista_clientes[Cliente]
                 if tiempo_actual_string >= dato['Expiracion']:
@@ -71,7 +72,6 @@ class SIPRegisterHandler(socketserver.DatagramRequestHandler):
 
 if __name__ == "__main__":
     lista_clientes = {}
-    datos = {}
     serv = socketserver.UDPServer(('', int(sys.argv[1])), SIPRegisterHandler)
     print("Lanzando servidor UDP de eco...")
     try:
