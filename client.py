@@ -20,9 +20,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as my_socket:
     my_socket.connect((SERVER, PORT))
     Primer_Mensaje = (METODO.upper() + ' sip:' + LOGIN + ' SIP/2.0\r\n')
     Segundo_Mensaje = ('Expires: ' + str(EXPIRES) + '\r\n')
-    print('Enviando: ' + Primer_Mensaje + Segundo_Mensaje)
-    my_socket.send(bytes(Primer_Mensaje, 'utf-8')
-                   + bytes(Segundo_Mensaje, 'utf-8') + b'\r\n')
+    Mensaje = Primer_Mensaje + Segundo_Mensaje
+    print('Enviando: ' + Mensaje)
+    my_socket.send(bytes(Mensaje, 'utf-8') + b'\r\n')
     data = my_socket.recv(1024)
     print('Recibido --> ', data.decode('utf-8'))
 print("Socket terminado.")
