@@ -34,9 +34,9 @@ class SIPRegisterHandler(socketserver.DatagramRequestHandler):
         self.datos = {}
         eliminar = []  # metemos los usuarios que borremos
         if metodo == 'REGISTER':
-            datos['Direccion'] = IP
-            datos['Expiracion'] = tiempo_expiracion_string
-            lista_clientes[usuario] = datos
+            self.datos['Direccion'] = IP
+            self.datos['Expiracion'] = tiempo_expiracion_string
+            lista_clientes[usuario] = self.datos
             if expires != 0:
                 print('REGISTRAMOS a ' + usuario + ' en la lista de clientes.')
 
