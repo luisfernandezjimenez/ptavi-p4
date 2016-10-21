@@ -31,7 +31,7 @@ class SIPRegisterHandler(socketserver.DatagramRequestHandler):
                                                  time.gmtime(tiempo_expirar))
         print('El cliente nos manda: ',  ' '.join(linea_cliente))
 
-        datos = {}
+        self.datos = {}
         eliminar = []  # metemos los usuarios que borremos
         if metodo == 'REGISTER':
             datos['Direccion'] = IP
@@ -66,7 +66,7 @@ class SIPRegisterHandler(socketserver.DatagramRequestHandler):
                 datos_json = json.load(json_fich)
                 usuarios = datos_json.keys()
             for usuario in usuarios:
-                lista_clientes[usuario] = datos
+                lista_clientes[usuario] = self.datos
         except:
             pass
 
