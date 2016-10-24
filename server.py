@@ -45,14 +45,12 @@ class SIPRegisterHandler(socketserver.DatagramRequestHandler):
                 if tiempo_actual_string >= dato['Expiracion']:
                     eliminar.append(Cliente)
 
-            self.wfile.write(b'SIP/2.0 200 OK' + b'\r\n\r\n')
-
             for usuario in eliminar:
                 print('El usuario ' + usuario + ' se ha DESCONECTADO')
                 del lista_clientes[usuario]
 
             print('Mandamos confirmacion\r\n')
-
+            self.wfile.write(b'SIP/2.0 200 OK' + b'\r\n\r\n')
             self.register2json()
 
     def register2json(self):
